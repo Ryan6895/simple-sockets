@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeScreenComponent implements OnInit {
 
+  public name: string;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public joinRoom(){
+
+  }
+
+  public createRoom(){
+
+  }
+
+  //route to lobby
 }
