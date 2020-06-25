@@ -6,5 +6,12 @@
   </button>
 </mat-form-field>
 
-<button mat-raised-button color="primary">Join</button>
+<button mat-raised-button color="primary" (click)="joinRoom()">Join</button>
 <button mat-raised-button color="accent">Create</button>
+
+<input [(ngModel)]="message" />
+<button (click)="sendMessage()">Send</button>
+
+<div *ngFor="let message of messages">
+  {{message}}
+</div>
