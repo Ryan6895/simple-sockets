@@ -30,7 +30,7 @@ io.on("connection", function(socket) {
   
     socket.on("message", ({ room, message }) => {
         console.log("message recieved in " + room + message);
-      socket.to(room).emit("message", message);
+      io.to(room).emit("message", message);
     });
   
     socket.on("typing", ({ room }) => {

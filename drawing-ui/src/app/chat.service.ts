@@ -20,7 +20,7 @@ export class ChatService {
   public getMessages = () => {
     return Observable.create((observer) => {
       this.socket.on('message', (data) => {
-        console.log('message');
+        console.log(data);
         if (data) {
 
           observer.next(data);
