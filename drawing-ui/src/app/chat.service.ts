@@ -34,16 +34,12 @@ export class ChatService {
       })
     };
 
-  public joinRoom(){
-    console.log('join room');
-
-    this.socket.emit('join_room', 'room1');
+  public joinRoom(name, room){
+    this.socket.emit('join_room', {name: name, room: room});
   }
 
-  public message(e){
-    console.log('sending message');
-
-    this.socket.emit('message', {room:'room1', message:e});
+  public message(room,message){
+    this.socket.emit('message', {room: room, message: message});
   }
 
 }

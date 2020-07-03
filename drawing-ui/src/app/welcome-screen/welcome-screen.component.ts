@@ -1,4 +1,4 @@
-
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 
@@ -13,8 +13,9 @@ export class WelcomeScreenComponent implements OnInit {
   messages: string[] = [];
 
   public name: string;
+  public room: string;
 
-  constructor(private socketService: ChatService) { }
+  constructor(private socketService: ChatService, private router: Router) { }
 
   ngOnInit(): void {
     this.socketService
@@ -25,17 +26,21 @@ export class WelcomeScreenComponent implements OnInit {
   }
 
   public joinRoom(){
-    this.socketService.joinRoom()
+    this.socketService.joinRoom(this.name,this.room)
+    this.goToLobby()
   }
 
   public createRoom(){
-
+    this.socketService.joinRoom(this.name,this.room)
+    this.goToLobby()
   }
 
   public sendMessage(){
-    this.socketService.message(this.message);
+    this.socketService.message(this.room, this.message);
     this.message = '';
   }
 
-  //route to lobby
+  private goToLobby(){
+    this.router.navigate(['/lobby'])
+  }
 }

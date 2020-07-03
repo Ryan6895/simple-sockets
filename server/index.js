@@ -9,22 +9,11 @@ let io = socketIO(server);
 
 const port = 3005;
 
-// io.on('connection', (socket) => {
-//     console.log('connected');
-    
-
-//     socket.on('new-message', (message) => {
-//         io.emit('new-message', message);
-//         console.log(message);
-//         });      
-
-// });
-
 io.on("connection", function(socket) {
     console.log("a user connected");
-    room = "room1"
-    socket.on("join_room", room => {
-        console.log('joined room ' + room);
+    
+    socket.on("join_room", ({name, room}) => {
+        console.log(name +' joined room ' + room);
       socket.join(room);
     });
   
