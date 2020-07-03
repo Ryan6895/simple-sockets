@@ -8,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
 export class LobbyComponent implements OnInit {
 
   public players: any = [{name: "test"}];
+  public newWord
+
   displayedColumns: string[] = ['name'];
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  startGame(){
+    console.log("start game");
+
   }
 
 }
