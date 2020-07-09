@@ -8,11 +8,17 @@ let socketIO = require('socket.io');
 let io = socketIO(server);
 
 const port = 3005;
+let rooms = [];
 
 io.on("connection", function(socket) {
     console.log("a user connected");
+    console.log(rooms);
+    socket.emit("rooms", rooms)
     
     socket.on("join_room", ({name, room}) => {
+        if (1 == 1){
+            rooms.push(room)
+        }
         console.log(name +' joined room ' + room);
       socket.join(room);
     });

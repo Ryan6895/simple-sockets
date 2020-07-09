@@ -16,14 +16,15 @@
   </mat-form-field>
 
   <div id="buttonContainer">
-    <button mat-raised-button color="primary" (click)="joinRoom()">Join</button>
+    <!-- <button mat-raised-button color="primary" (click)="joinRoom()">Join</button> -->
     <button mat-raised-button color="accent" (click)="createRoom()">Create</button>
   </div>
 </div>
 
 <!-- <input [(ngModel)]="message" />
 <button (click)="sendMessage()">Send</button>
-
-<div *ngFor="let message of messages">
-  {{message}}
-</div> -->
+-->
+here
+<div *ngFor="let room of rooms">
+  <button (click)="joinRoom(room)">{{room}}</button>
+</div>

@@ -14,6 +14,7 @@ export class WelcomeScreenComponent implements OnInit {
 
   public name: string;
   public room: string;
+  public rooms: string[];
 
   constructor(private socketService: ChatService, private router: Router) { }
 
@@ -23,10 +24,18 @@ export class WelcomeScreenComponent implements OnInit {
     .subscribe((message: string) => {
       this.messages.push(message);
     })
+
+    this.socketService
+    .getRooms()
+    .subscribe((rooms: string[]) => {
+      console.log(rooms);
+
+      this.rooms = rooms
+    })
   }
 
-  public joinRoom(){
-    this.socketService.joinRoom(this.name,this.room)
+  public joinRoom(room){
+    this.socketService.joinRoom(this.name,room)
     this.goToLobby()
   }
 
