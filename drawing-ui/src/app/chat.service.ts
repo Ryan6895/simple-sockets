@@ -20,9 +20,7 @@ export class ChatService {
   public getMessages = () => {
     return Observable.create((observer) => {
       this.socket.on('message', (data) => {
-        console.log(data);
         if (data) {
-
           observer.next(data);
         } else {
           observer.error('Unable To Reach Server');
@@ -37,9 +35,7 @@ export class ChatService {
     public getRooms = () => {
       return Observable.create((observer) => {
         this.socket.on('rooms', (data) => {
-          console.log(data);
           if (data) {
-
             observer.next(data);
           } else {
             observer.error('Unable To Reach Server');
@@ -50,6 +46,21 @@ export class ChatService {
         }
         })
       };
+
+      public getUsers = () => {
+        return Observable.create((observer) => {
+          this.socket.on('users', (data) => {
+            if (data) {
+              observer.next(data);
+            } else {
+              observer.error('Unable To Reach Server');
+            }
+          });
+          return () => {
+            this.socket.disconnect();
+          }
+          })
+        };
 
   public joinRoom(name, room){
     this.socket.emit('join_room', {name: name, room: room});

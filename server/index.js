@@ -9,18 +9,21 @@ let io = socketIO(server);
 
 const port = 3005;
 let rooms = [];
+//room{name: name, users: ['Ryan']}
 
 io.on("connection", function(socket) {
     console.log("a user connected");
-    console.log(rooms);
     socket.emit("rooms", rooms)
     
     socket.on("join_room", ({name, room}) => {
-        if (1 == 1){
+        if (rooms.filter(x => x == room).length != 1){
             rooms.push(room)
         }
+
         console.log(name +' joined room ' + room);
       socket.join(room);
+      io.to(room).emit(room.users)
+      io.emit("rooms", rooms)
     });
   
     socket.on("message", ({ room, message }) => {

@@ -28,8 +28,6 @@ export class WelcomeScreenComponent implements OnInit {
     this.socketService
     .getRooms()
     .subscribe((rooms: string[]) => {
-      console.log(rooms);
-
       this.rooms = rooms
     })
   }
