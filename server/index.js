@@ -10,7 +10,6 @@ let io = socketIO(server);
 const port = 3005;
 let rooms = [];
 let users = [];
-//room{name: name, users: ['Ryan']}
 
 io.on("connection", function(socket) {
     socket.emit("rooms", rooms)
@@ -22,8 +21,8 @@ io.on("connection", function(socket) {
         console.log(name +' joined ' + room);
 
       socket.join(room);
-      console.log(rooms.filter(x => x.name== room.name)[0].users);
-      io.to(room).emit('users', rooms.filter(x => x.name== room.name)[0].users)
+      
+      io.to(room).emit('users', getRoomUsers(room))
       io.emit("rooms", rooms)
     });
   
@@ -38,18 +37,25 @@ io.on("connection", function(socket) {
 
     socket.on('disconnect', () => {
       
-      console.log(socket.id);
-      console.log('user left');
-
+      var user = users.filter(x => x.Socket == socket.id)[0];
+      var index = users.findIndex(x => x.Socket == socket.id);
+      users.splice(index, 1)
+      
+      console.log(user.Name + ' left ' + user.Room);
+      io.to(user.Room).emit('users', getRoomUsers(user.Room))
       
     });
 });
 
+function getRoomUsers(room){
+  return users.filter(x => x.Room == room)
+}
+
 function joinRoom(name, socket, room) {
-  if (rooms.filter(x => x.name == room.name).length != 1){
-    rooms.push({room: room, users: [{Name: name, socket: socket}]})
-  } else {
-    rooms.filter(x => x.name== room.name)[0].users.push({Name: name, socket: socket})
+  users.push({Name: name, Socket: socket, Room: room})
+
+  if (rooms.filter(x => x == room).length != 1){
+    rooms.push(room)
   } 
 }
 
