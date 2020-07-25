@@ -20,3 +20,22 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<div class="chat">
+  <div class="chat-title">
+    <div *ngFor="let message of messages">
+      <h1>{{message}}</h1>
+    </div>
+  </div>
+  <div class="messages">
+    {{messages}}
+  </div>
+  <div class="message-box">
+    <input matInput type="text" [(ngModel)]="message">
+  <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Clear" (click)="message=''">
+    <mat-icon>close</mat-icon>
+  </button>
+    <button mat-raised-button (click)="sendMessage()">Send</button>
+  </div>
+
+</div>

@@ -10,6 +10,9 @@ export class LobbyComponent implements OnInit {
 
   public players: any = [];
   public newWord
+  public room
+  public message
+  public messages: string[] = [];
 
   displayedColumns: string[] = ['name'];
 
@@ -18,11 +21,23 @@ export class LobbyComponent implements OnInit {
   ngOnInit(): void {
     this.socketService
     .getUsers()
-    .subscribe((users: string[]) => {
-      this.players = users
-      console.log(this.players);
-
+    .subscribe((roomUsers) => {
+      this.players = roomUsers.Users
+      this.room = roomUsers.Room
     })
+
+    this.socketService
+    .getMessages()
+    .subscribe((message) => {
+      this.messages.push(`${message.User}: ${message.Message}`)
+    })
+  }
+
+  public sendMessage(){
+    if(this.message != ''){
+      this.socketService.message(this.room, this.message);
+      this.message = '';
+    }
   }
 
   startGame(){

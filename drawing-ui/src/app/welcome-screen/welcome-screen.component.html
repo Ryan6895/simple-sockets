@@ -16,7 +16,15 @@
   </mat-form-field>
 
   <div id="buttonContainer">
-    <!-- <button mat-raised-button color="primary" (click)="joinRoom()">Join</button> -->
+    <mat-form-field>
+      <mat-label>Rooms</mat-label>
+      <mat-select (selectionChange)="test($event)">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let room of rooms" [value]="room">
+          {{room}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <button mat-raised-button color="accent" (click)="createRoom()">Create</button>
   </div>
 </div>
@@ -24,7 +32,4 @@
 <!-- <input [(ngModel)]="message" />
 <button (click)="sendMessage()">Send</button>
 -->
-here
-<div *ngFor="let room of rooms">
-  <button (click)="joinRoom(room)">{{room}}</button>
-</div>
+

@@ -49,7 +49,7 @@ export class ChatService {
 
       public getUsers = () => {
         return Observable.create((observer) => {
-          this.socket.on('users', (data) => {
+          this.socket.on('roomUsers', (data) => {
             if (data) {
               observer.next(data);
             } else {

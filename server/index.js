@@ -22,14 +22,15 @@ io.on("connection", function(socket) {
 
       socket.join(room);
       
-      io.to(room).emit('users', getRoomUsers(room))
+      io.to(room).emit('roomUsers', {Users: getRoomUsers(room), Room: room})
       io.emit("rooms", rooms)
     });
   
-    // socket.on("message", ({ room, message }) => {
-    //     console.log("message recieved in " + room + message);
-    //   io.to(room).emit("message", message);
-    // });
+    socket.on("message", ({ room, message }) => {
+      var user = users.filter(x => x.Socket == socket.id)[0];
+        console.log("message recieved in " + room + message);
+      io.to(room).emit("message", {User: user.Name, Message: message});
+    });
   
     // socket.on("typing", ({ room }) => {
     //   socket.to(room).emit("typing", "Someone is typing");
@@ -38,12 +39,13 @@ io.on("connection", function(socket) {
     socket.on('disconnect', () => {
       
       var user = users.filter(x => x.Socket == socket.id)[0];
-      var index = users.findIndex(x => x.Socket == socket.id);
-      users.splice(index, 1)
-      
-      console.log(user.Name + ' left ' + user.Room);
-      io.to(user.Room).emit('users', getRoomUsers(user.Room))
-      
+      if (user){
+        var index = users.findIndex(x => x.Socket == socket.id);
+        users.splice(index, 1)
+        
+        console.log(user.Name + ' left ' + user.Room);
+        io.to(user.Room).emit('users', getRoomUsers(user.Room))
+      }
     });
 });
 

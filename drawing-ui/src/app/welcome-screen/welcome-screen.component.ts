@@ -32,6 +32,10 @@ export class WelcomeScreenComponent implements OnInit {
     })
   }
 
+  test(e){
+    this.room = e.value
+  }
+
   public joinRoom(room){
     this.socketService.joinRoom(this.name,room)
     this.goToLobby()
@@ -40,11 +44,6 @@ export class WelcomeScreenComponent implements OnInit {
   public createRoom(){
     this.socketService.joinRoom(this.name,this.room)
     this.goToLobby()
-  }
-
-  public sendMessage(){
-    this.socketService.message(this.room, this.message);
-    this.message = '';
   }
 
   private goToLobby(){
