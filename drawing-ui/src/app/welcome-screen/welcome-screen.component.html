@@ -18,7 +18,7 @@
   <div id="buttonContainer">
     <mat-form-field>
       <mat-label>Rooms</mat-label>
-      <mat-select (selectionChange)="test($event)">
+      <mat-select (selectionChange)="onRoomSelected($event)">
         <mat-option>--</mat-option>
         <mat-option *ngFor="let room of rooms" [value]="room">
           {{room}}
@@ -28,8 +28,3 @@
     <button mat-raised-button color="accent" (click)="createRoom()">Create</button>
   </div>
 </div>
-
-<!-- <input [(ngModel)]="message" />
-<button (click)="sendMessage()">Send</button>
--->
-

@@ -32,7 +32,7 @@ export class WelcomeScreenComponent implements OnInit {
     })
   }
 
-  test(e){
+  public onRoomSelected(e){
     this.room = e.value
   }
 

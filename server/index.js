@@ -8,6 +8,7 @@ let socketIO = require('socket.io');
 let io = socketIO(server);
 
 const port = 3005;
+let words = require("./words.json")
 let rooms = [];
 let users = [];
 
@@ -15,11 +16,7 @@ io.on("connection", function(socket) {
     socket.emit("rooms", rooms)
     
     socket.on("join_room", ({name, room}) => {
-        joinRoom(name, socket.id , room)
-       
-        console.log(rooms);
-        console.log(name +' joined ' + room);
-
+      joinRoom(name, socket.id , room)
       socket.join(room);
       
       io.to(room).emit('roomUsers', {Users: getRoomUsers(room), Room: room})
@@ -28,7 +25,6 @@ io.on("connection", function(socket) {
   
     socket.on("message", ({ room, message }) => {
       var user = users.filter(x => x.Socket == socket.id)[0];
-        console.log("message recieved in " + room + message);
       io.to(room).emit("message", {User: user.Name, Message: message});
     });
   
@@ -42,8 +38,6 @@ io.on("connection", function(socket) {
       if (user){
         var index = users.findIndex(x => x.Socket == socket.id);
         users.splice(index, 1)
-        
-        console.log(user.Name + ' left ' + user.Room);
         io.to(user.Room).emit('users', getRoomUsers(user.Room))
       }
     });

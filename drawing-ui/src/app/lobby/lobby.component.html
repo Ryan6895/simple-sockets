@@ -1,6 +1,8 @@
 <button (click)="startGame()">Start</button>
 
-<mat-form-field class="example-form-field">
+{{room}}
+
+<mat-form-field>
   <mat-label>Custom Words</mat-label>
   <input matInput type="text" [(ngModel)]="newWord">
   <button mat-button *ngIf="newWord" matSuffix mat-icon-button aria-label="Clear" (click)="newWord=''">
@@ -11,7 +13,6 @@
 <span>Users</span>
 <table mat-table [dataSource]="players" class="mat-elevation-z8">
 
-  <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let user"> {{user.Name}} </td>
@@ -27,10 +28,7 @@
       <h1>{{message}}</h1>
     </div>
   </div>
-  <div class="messages">
-    {{messages}}
-  </div>
-  <div class="message-box">
+  <div>
     <input matInput type="text" [(ngModel)]="message">
   <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Clear" (click)="message=''">
     <mat-icon>close</mat-icon>
