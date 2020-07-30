@@ -13,10 +13,6 @@ export class ChatService {
     this.socket = io(this.url);
   }
 
-  public sendMessage(message) {
-    this.socket.emit('new-message', message);
-  }
-
   public getMessages = () => {
     return Observable.create((observer) => {
       this.socket.on('message', (data) => {
@@ -69,5 +65,7 @@ export class ChatService {
   public message(room,message){
     this.socket.emit('message', {room: room, message: message});
   }
+
+  public AddCustomWord = (word): void => this.socket.emit('add_custom_word', word) 
 
 }

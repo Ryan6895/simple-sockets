@@ -23,7 +23,7 @@ Room: {{room}}
   <div id="chat-input">
     <mat-form-field id="message">
       <mat-label>Message</mat-label>
-      <input matInput placeholder="Message" [(ngModel)]="message">
+      <input matInput placeholder="Message" (keydown.enter)="sendMessage()" [(ngModel)]="message">
     </mat-form-field>
   <button mat-button *ngIf="message" matSuffix mat-icon-button aria-label="Clear" (click)="message=''">
     <mat-icon>close</mat-icon>
@@ -36,7 +36,7 @@ Room: {{room}}
 <div>
   <mat-form-field>
     <mat-label>Custom Words</mat-label>
-    <input matInput type="text" [(ngModel)]="newWord">
+    <input matInput type="text" [(ngModel)]="newWord"(keydown.enter)="addCustomWords()">
     <button mat-button *ngIf="newWord" matSuffix mat-icon-button aria-label="Clear" (click)="newWord=''">
       <mat-icon>close</mat-icon>
     </button>

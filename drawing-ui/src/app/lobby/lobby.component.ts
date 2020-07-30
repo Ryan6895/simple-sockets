@@ -31,6 +31,8 @@ export class LobbyComponent implements OnInit {
     .subscribe((message) => {
       this.messages.push(`${message.User}: ${message.Message}`)
     })
+
+
   }
 
   public sendMessage(){
@@ -40,9 +42,13 @@ export class LobbyComponent implements OnInit {
     }
   }
 
+  public addCustomWords() {
+    console.log(this.newWord);
+    
+  }
+
   startGame(){
     console.log("start game");
-
   }
 
 }

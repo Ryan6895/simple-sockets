@@ -11,6 +11,7 @@ const port = 3005;
 let words = require("./words.json")
 let rooms = [];
 let users = [];
+let customWords = [];
 
 io.on("connection", function(socket) {
     socket.emit("rooms", rooms)
@@ -43,9 +44,12 @@ io.on("connection", function(socket) {
     });
 });
 
-function getRoomUsers(room){
-  return users.filter(x => x.Room == room)
+function AddCustomWords(word){
+  
 }
+
+getRoomUsers = (room) => users.filter(x => x.Room == room)
+
 
 function joinRoom(name, socket, room) {
   users.push({Name: name, Socket: socket, Room: room})
